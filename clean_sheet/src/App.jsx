@@ -5,8 +5,12 @@ import Categories from './components/Categories'
 import Layout from './components/Layout'
 import Category from './components/Category'
 import CategoriesIndex from './components/CategoriesIndex'
+import { posts } from './assets/post'
+import PostPage from './components/PostPage'
 
 function App() {
+
+  console.log(posts)
  
   return (
     <Layout>
@@ -15,6 +19,7 @@ function App() {
         <Route path="categories/*" element={<Categories />}>
           <Route index element={<CategoriesIndex />}/>
           <Route path=':slug' element={<Category />}/>
+          <Route path=':slug/:potsid' element={<PostPage />}/>
         </Route>
       </Routes>
     </Layout>
