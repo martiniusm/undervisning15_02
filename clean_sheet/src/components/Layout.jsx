@@ -12,9 +12,8 @@ export default function Layout({children}){
             </nav>
         </header>
         <main>
-          {children}  
+        {children}
         </main>
-        
         <footer>Footer</footer>
         </>
     )
