@@ -14,7 +14,7 @@ function App() {
 
   const [content, setContent] = useState([])
   const [query, setQuery] = useState("")
-  const [currentId, setCurrentId] = useState(null)
+  const [currentId, setCurrentId] = useState("")
 
   const getData = async () => {
 
@@ -30,6 +30,7 @@ function App() {
 
   useEffect(() => {
     getData()
+    setCurrentId(localStorage.getItem("karakterID"))
   },[query])
 
   console.log("ID", currentId)

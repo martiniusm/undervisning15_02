@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 export default function CategoriesIndex({content, setQuery, setCurrentId}){
 
-    console.log( "Sjekk content", content)
+    console.log("Sjekk content", content)
     const [search, setSearch] = useState("")
 
     const handleSubmit = (e) => {
@@ -16,6 +16,7 @@ export default function CategoriesIndex({content, setQuery, setCurrentId}){
 
     const handleClick = (id) => {
         setCurrentId(id)
+        localStorage.setItem("karakterID", id)
     }
 
     console.log("S", content)
@@ -31,5 +32,6 @@ export default function CategoriesIndex({content, setQuery, setCurrentId}){
         <ul className="category-list">
             {content?.map(item => <li key={item.id}><Link to={item.name} onClick={()=>handleClick(item.id)}>{item.name}</Link></li>)}
         </ul>
-    </>)
+    </>
+    )
 }

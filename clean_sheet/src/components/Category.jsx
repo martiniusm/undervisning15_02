@@ -5,6 +5,7 @@ import Episode from "./Episode"
 
 export default function Category({currentId}){
     const [post, setPost] = useState()
+    const [name, setName] = useState(null)
 
     const getCharacter = async() => {
         fetch(`https://rickandmortyapi.com/api/character/${currentId}`)
@@ -15,11 +16,13 @@ export default function Category({currentId}){
 
     useEffect(()=>{
        getCharacter()
-    },[])
+    },[currentId])
 
-    console.log("sjekk",currentId)
+    console.log("sjekk", currentId)
+
     return (
     <section>
+        <p>{name}</p>
         <h1>{post?.name}</h1>
         <img src={post?.image} alt={post?.name} />
         <ul>
