@@ -1,18 +1,29 @@
 import { useState } from "react"
 
-export default function Login({setLogedIn}){
+export default function Login({setLogedIn, users, logedIn}){
 
-    const [users, setUsers] = useState({
+    const [user, setUsers] = useState({
         username: "",
         password: ""
     })
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
+    const handleSubmit = (e) => {
+        e.preventDefault()
     }
 
-    const handleChange = (event) => {
-        console.log(event.target.value)
+    const handleChange = (e) => {
+       const inputName = e.target.name
+       const inputValue = e.target.value
+
+       setUsers((prev) => ({...prev, [inputName]: inputValue}))
+    }
+
+    const handleClick = () => {
+        const found = users.find(element => element.username === user.username && element.password === user.password)
+        if (found){
+            setLogedIn(true)
+            localStorage.setItem("logedIn", true)
+        }
     }
 
     return(
@@ -23,7 +34,7 @@ export default function Login({setLogedIn}){
             <input type="text" id="username" name="username" placeholder="Mart..." onChange={handleChange}></input>
             <label htmlFor="password">Passord</label>
             <input type="password" id="password" name="password" placeholder="*******" onChange={handleChange}></input>
-            <button type="submit" onClick={() => setLogedIn(true)}>Logg inn</button>
+            <button type="submit" onClick={handleClick}>Logg inn</button>
         </form>
         </>
     )

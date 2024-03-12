@@ -8,7 +8,12 @@ import Login from './components/Login'
 
 function App() {
 
-  const [logedIn, setLogedIn] = useState(false)
+  const [logedIn, setLogedIn] = useState(() => {
+    const data = localStorage.getItem("logedIn")
+    const logedInData = JSON.parse(data)
+    return logedInData
+  })
+
   const [food, setFood] = useState("")
   const apiKey = process.env.REACT_APP_API_KEY
 
@@ -48,10 +53,10 @@ function App() {
 
   return (
     <>
-      <Layout logedIn={logedIn}>
+      <Layout logedIn={logedIn} setLogedIn={setLogedIn}>
         <Routes>
           <Route index element={<Home />} />
-          <Route path='login' element={<Login setLogedIn={setLogedIn} />} />
+          <Route path='login' element={<Login setLogedIn={setLogedIn} logedIn={logedIn} users={users} />} />
         </Routes>
       </Layout>
       {!logedIn ? <Navigate to="login" replace /> : <Navigate to="/" replace />}
